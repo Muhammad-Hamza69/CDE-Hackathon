@@ -1,0 +1,21 @@
+{
+  "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+  "database.hostname": "CDK_INJECTED_AT_DEPLOY",
+  "database.port": "5432",
+  "database.user": "CDK_INJECTED_AT_DEPLOY",
+  "database.password": "CDK_INJECTED_AT_DEPLOY",
+  "database.dbname": "postgres",
+  "topic.prefix": "cdc",
+  "table.include.list": "iot.iot_events",
+  "plugin.name": "pgoutput",
+  "slot.name": "debezium_iot",
+  "publication.name": "dbz_publication",
+  "publication.autocreate.mode": "disabled",
+  "transforms": "unwrap",
+  "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+  "transforms.unwrap.drop.tombstones": "false",
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "false",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "false"
+}

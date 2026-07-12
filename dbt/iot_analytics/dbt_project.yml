@@ -1,0 +1,24 @@
+name: 'iot_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'iot_analytics'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  iot_analytics:
+    staging:
+      +materialized: view
+      +schema: raw
+    silver:
+      +materialized: table
+      +schema: clean
+    gold:
+      +materialized: table
+      +schema: analytics

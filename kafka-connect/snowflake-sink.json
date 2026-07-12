@@ -1,0 +1,19 @@
+{
+  "connector.class": "com.snowflake.kafka.connector.SnowflakeStreamingSinkConnector",
+  "topics": "cdc.iot.iot_events",
+  "snowflake.url.name": "CDK_INJECTED_AT_DEPLOY",
+  "snowflake.user.name": "KAFKA_CONNECTOR_SVC",
+  "snowflake.private.key": "CDK_INJECTED_AT_DEPLOY",
+  "snowflake.database.name": "HACKATHON_IOT",
+  "snowflake.schema.name": "RAW",
+  "snowflake.role.name": "KAFKA_CONNECTOR_ROLE",
+  "snowflake.topic2table.map": "cdc.iot.iot_events:IOT_EVENTS",
+  "snowflake.enable.schematization": "TRUE",
+  "snowflake.streaming.validate.compatibility.with.classic": "false",
+  "buffer.flush.time": "10",
+  "buffer.count.records": "100",
+  "buffer.size.bytes": "5000000",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "false"
+}

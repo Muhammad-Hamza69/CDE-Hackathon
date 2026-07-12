@@ -1,0 +1,5 @@
+# Vendored by scripts/build_bridge_lambda.sh (pip install --target .) - not our code.
+*
+!.gitignore
+!handler.py
+!requirements.txt

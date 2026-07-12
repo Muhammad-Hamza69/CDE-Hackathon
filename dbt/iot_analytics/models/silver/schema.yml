@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: iot_validated
+    description: Silver layer - validated, tagged geoLocation events (Task 2.3).
+    columns:
+      - name: event_id
+        tests: [unique, not_null]
+      - name: device_id
+        tests: [not_null]
+      - name: event_ts
+        tests: [not_null]
+      - name: severity
+        tests:
+          - accepted_values:
+              values: ['ok', 'stale', 'out_of_bounds']

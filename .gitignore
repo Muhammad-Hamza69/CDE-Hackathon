@@ -1,0 +1,48 @@
+# --- Secrets: never commit these ---
+aws_config.txt
+snowflake_config.txt
+sql_server_config.txt
+.env
+.env.*
+!.env.example
+**/profiles.yml
+!**/profiles.yml.example
+*.pem
+*.key
+*.p8
+*.crt
+secrets/
+simulator/certs/
+
+# --- CDK ---
+infra/cdk.out/
+infra/.venv/
+infra/**/__pycache__/
+infra/*.egg-info/
+cdk.context.json
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# --- dbt ---
+dbt/**/target/
+dbt/**/logs/
+dbt/**/dbt_packages/
+dbt/**/.user.yml
+
+# --- Node (mermaid-cli etc.) ---
+node_modules/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Local scratch / large source doc (kept out of the submitted repo tree) ---
+*.pdf

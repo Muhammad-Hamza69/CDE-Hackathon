@@ -1,0 +1,38 @@
+{
+  "title": "IoT Live Sensor Panel (Task 2.5 bonus)",
+  "description": "Grafana dashboard over the DynamoDB table (iot-hack-timeseries) populated by lambda-dynamodb/handler.py every minute from Snowflake CLEAN.IOT_VALIDATED. Originally targeted AWS Timestream per the brief, but Timestream for LiveAnalytics is closed to new AWS accounts (confirmed via a live `cdk deploy` attempt: 'Only existing Timestream for LiveAnalytics customers can access the service', HandlerErrorCode: GeneralServiceException). Import via Grafana's dashboard JSON import after installing the community 'marcusolsson-dynamodb-datasource' plugin and adding a DynamoDB data source (table: iot-hack-timeseries, partition key: device_id, sort key: event_time).",
+  "panels": [
+    {
+      "title": "Live device positions (lat/long over time)",
+      "type": "timeseries",
+      "datasource": { "type": "marcusolsson-dynamodb-datasource" },
+      "targets": [
+        {
+          "queryType": "query",
+          "keyConditionExpression": "device_id = :device_id",
+          "expressionAttributeValues": { ":device_id": "device-001" },
+          "note": "One target per device_id, or use a Grafana repeat-panel/variable over the known device-00N ids - DynamoDB Query requires an exact partition key, unlike SQL's WHERE IN."
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 10 }
+    },
+    {
+      "title": "Event count per device (last hour)",
+      "type": "barchart",
+      "datasource": { "type": "marcusolsson-dynamodb-datasource" },
+      "targets": [
+        {
+          "queryType": "scan",
+          "filterExpression": "event_time > :one_hour_ago AND device_id <> :watermark_key",
+          "expressionAttributeValues": {
+            ":one_hour_ago": "$__from_epoch_ms",
+            ":watermark_key": "__watermark__"
+          }
+        }
+      ],
+      "gridPos": { "x": 0, "y": 10, "w": 24, "h": 8 }
+    }
+  ],
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" }
+}

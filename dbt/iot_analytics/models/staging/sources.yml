@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    database: HACKATHON_IOT
+    schema: RAW
+    tables:
+      - name: iot_events
+        description: >
+          Bronze table populated by the Snowflake Kafka Connector consuming
+          the Debezium CDC topic cdc.iot.iot_events (Task 2.2). Schematized
+          columns mirror postgres/init.sql's iot.iot_events table 1:1
+          because the Debezium unwrap SMT flattens the CDC envelope before
+          it reaches Kafka.

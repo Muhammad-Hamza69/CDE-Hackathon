@@ -1,0 +1,16 @@
+# Copy to ~/.dbt/profiles.yml (or set DBT_PROFILES_DIR to this folder) and
+# fill in real values via environment variables - never commit real
+# credentials. This file itself is a template only.
+iot_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'ACCOUNTADMIN') }}"
+      database: HACKATHON_IOT
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      schema: RAW
+      threads: 4

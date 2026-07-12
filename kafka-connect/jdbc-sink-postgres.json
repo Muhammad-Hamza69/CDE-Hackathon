@@ -1,0 +1,19 @@
+{
+  "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+  "tasks.max": "1",
+  "topics": "iot-events",
+  "connection.url": "CDK_INJECTED_AT_DEPLOY",
+  "connection.user": "CDK_INJECTED_AT_DEPLOY",
+  "connection.password": "CDK_INJECTED_AT_DEPLOY",
+  "auto.create": "true",
+  "auto.evolve": "true",
+  "insert.mode": "insert",
+  "pk.mode": "none",
+  "table.name.format": "iot.iot_events",
+  "transforms": "renameTimestamp",
+  "transforms.renameTimestamp.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+  "transforms.renameTimestamp.renames": "timestamp:event_ts",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "true"
+}
